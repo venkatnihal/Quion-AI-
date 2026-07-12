@@ -1,0 +1,180 @@
+/* QuionAI — Global CSS Keyframe Animations */
+
+@keyframes nebula-drift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.08; }
+  50%       { opacity: 0.25; }
+}
+
+@keyframes orb-breathe {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float-up-down {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes count-pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.04); }
+}
+
+/* Modal / overlay entrance (used by the booking scheduler + exit-intent) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes border-glow-pulse {
+  0%, 100% { border-color: rgba(0, 212, 255, 0.08); }
+  50%       { border-color: rgba(0, 212, 255, 0.30); }
+}
+
+@keyframes hue-rotate-slow {
+  from { filter: hue-rotate(0deg); }
+  to   { filter: hue-rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes ping-ring {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Utility classes */
+.animate-nebula {
+  animation: nebula-drift 20s var(--ease-smooth) infinite;
+}
+
+.animate-orb {
+  animation: orb-breathe 4s var(--ease-smooth) infinite;
+}
+
+.animate-marquee {
+  animation: marquee-scroll 20s linear infinite;
+}
+
+.animate-float {
+  animation: float-up-down 4s var(--ease-smooth) infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse var(--dur-pulse) var(--ease-smooth) infinite;
+}
+
+.animate-border-glow {
+  animation: border-glow-pulse var(--dur-pulse) var(--ease-smooth) infinite;
+}
+
+.animate-hue-rotate {
+  animation: hue-rotate-slow 12s linear infinite;
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-ping-ring {
+  animation: ping-ring 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Glass card utility */
+.glass-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+}
+
+.glass-card-elevated {
+  background: var(--bg-glass-elevated);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-nebula,
+  .animate-orb,
+  .animate-marquee,
+  .animate-float,
+  .animate-spin-slow,
+  .animate-glow-pulse,
+  .animate-border-glow,
+  .animate-hue-rotate,
+  .animate-shimmer,
+  .animate-ping-ring {
+    animation: none;
+  }
+}

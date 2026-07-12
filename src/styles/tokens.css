@@ -1,0 +1,130 @@
+/* QuionAI Design Tokens — Complete CSS Custom Property System */
+
+:root {
+  /* ── Backgrounds ── */
+  --bg-canvas:         #050816;
+  --bg-surface:        #0F172A;
+  --bg-elevated:       #111827;
+  --bg-overlay:        rgba(5, 8, 22, 0.92);
+  --bg-glass:          rgba(15, 23, 42, 0.60);
+  --bg-glass-elevated: rgba(15, 23, 42, 0.80);
+
+  /* ── Brand ── */
+  --brand-blue:        #00D4FF;
+  --brand-purple:      #6D5DFC;
+  --brand-accent:      #8B5CF6;
+  --brand-mid:         #22D3EE;
+
+  /* ── Text ── (raised contrast for readability) */
+  --text-primary:      #FFFFFF;
+  --text-secondary:    #AEBACD;
+  --text-muted:        #6B7B91;
+  --text-inverted:     #050816;
+  --text-link:         #00D4FF;
+
+  /* ── Borders ── */
+  --border-default:    rgba(255, 255, 255, 0.06);
+  --border-subtle:     rgba(255, 255, 255, 0.04);
+  --border-active:     rgba(0, 212, 255, 0.30);
+  --border-brand:      rgba(109, 93, 252, 0.40);
+  --border-glass:      rgba(255, 255, 255, 0.08);
+
+  /* ── Gradients ── */
+  --grad-hero:         linear-gradient(135deg, #00D4FF 0%, #6D5DFC 50%, #8B5CF6 100%);
+  --grad-glow:         linear-gradient(90deg, #00D4FF, #22D3EE, #6D5DFC);
+  --grad-dark-bg:      linear-gradient(180deg, #050816 0%, #0F172A 50%, #111827 100%);
+  --grad-text:         linear-gradient(135deg, #00D4FF, #6D5DFC);
+  --grad-radial-blue:  radial-gradient(ellipse at center, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+  --grad-radial-purple: radial-gradient(ellipse at center, rgba(109, 93, 252, 0.12) 0%, transparent 70%);
+
+  /* ── Shadows / Glows ── */
+  --shadow-card:       0 4px 24px rgba(0, 0, 0, 0.50);
+  --shadow-elevated:   0 20px 60px rgba(0, 0, 0, 0.40);
+  --glow-blue:         0 0 40px rgba(0, 212, 255, 0.45);
+  --glow-blue-soft:    0 0 80px rgba(0, 212, 255, 0.20);
+  --glow-purple:       0 0 40px rgba(109, 93, 252, 0.40);
+  --glow-hero:         0 0 120px rgba(0, 212, 255, 0.12);
+
+  /* ── Spacing ── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --space-40: 160px;
+
+  /* ── Border Radius ── */
+  --radius-sm:   6px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  20px;
+  --radius-3xl:  24px;
+  --radius-full: 9999px;
+
+  /* ── Z-index ── */
+  --z-three:    -1;
+  --z-base:      0;
+  --z-raised:    10;
+  --z-dropdown:  100;
+  --z-sticky:    200;
+  --z-navbar:    300;
+  --z-overlay:   400;
+  --z-modal:     500;
+  --z-toast:     600;
+  --z-cursor:    700;
+
+  /* ── Durations ── */
+  --dur-fast:    150ms;
+  --dur-normal:  250ms;
+  --dur-medium:  400ms;
+  --dur-slow:    600ms;
+  --dur-slower:  800ms;
+  --dur-ambient: 2000ms;
+  --dur-pulse:   3000ms;
+  --dur-loop:    8000ms;
+
+  /* ── Easings ── */
+  --ease-enter:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit:   cubic-bezier(0.7, 0, 1, 1);
+  --ease-inout:  cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.37, 0, 0.63, 1);
+
+  /* ── Typography ── */
+  --type-display: clamp(3.5rem, 8vw, 7.5rem);
+  --type-h1:      clamp(2.75rem, 5.5vw, 5rem);
+  --type-h2:      clamp(2rem, 4vw, 3.5rem);
+  --type-h3:      clamp(1.5rem, 2.5vw, 2.25rem);
+  --type-h4:      clamp(1.25rem, 2vw, 1.625rem);
+  --type-body-xl: clamp(1.1875rem, 1.6vw, 1.375rem);
+  --type-body-lg: 1.1875rem;
+  --type-body:    1.0625rem;
+  --type-body-sm: 1rem;
+  --type-label:   0.8125rem;
+  --type-micro:   0.75rem;
+  --type-mono:    0.9375rem;
+
+  /* ── Section ── (tighter, balanced rhythm — no excessive gaps) */
+  --section-py: 112px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --section-py: 88px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-py: 64px;
+  }
+}

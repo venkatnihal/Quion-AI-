@@ -1,0 +1,34 @@
+<svg viewBox="0 0 180 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon -->
+  <circle cx="22" cy="22" r="19" stroke="url(#wGrad)" stroke-width="1.6"/>
+  <rect x="20" y="1" width="4" height="3" rx="1" fill="url(#wGrad)"/>
+  <rect x="20" y="40" width="4" height="3" rx="1" fill="url(#wGrad)"/>
+  <rect x="1" y="20" width="3" height="4" rx="1" fill="url(#wGrad)"/>
+  <rect x="40" y="20" width="3" height="4" rx="1" fill="url(#wGrad)"/>
+  <circle cx="22" cy="21" r="2.5" fill="url(#wGrad)"/>
+  <circle cx="15" cy="16" r="1.5" fill="url(#wGrad)" opacity="0.85"/>
+  <circle cx="29" cy="16" r="1.5" fill="url(#wGrad)" opacity="0.85"/>
+  <circle cx="13" cy="25" r="1.5" fill="url(#wGrad)" opacity="0.85"/>
+  <circle cx="31" cy="25" r="1.5" fill="url(#wGrad)" opacity="0.85"/>
+  <circle cx="22" cy="13" r="1.2" fill="url(#wGrad)" opacity="0.7"/>
+  <circle cx="22" cy="30" r="1.2" fill="url(#wGrad)" opacity="0.7"/>
+  <line x1="22" y1="21" x2="15" y2="16" stroke="url(#wGrad)" stroke-width="0.7" opacity="0.55"/>
+  <line x1="22" y1="21" x2="29" y2="16" stroke="url(#wGrad)" stroke-width="0.7" opacity="0.55"/>
+  <line x1="22" y1="21" x2="13" y2="25" stroke="url(#wGrad)" stroke-width="0.7" opacity="0.55"/>
+  <line x1="22" y1="21" x2="31" y2="25" stroke="url(#wGrad)" stroke-width="0.7" opacity="0.55"/>
+  <line x1="22" y1="21" x2="22" y2="13" stroke="url(#wGrad)" stroke-width="0.7" opacity="0.45"/>
+  <line x1="22" y1="21" x2="22" y2="30" stroke="url(#wGrad)" stroke-width="0.7" opacity="0.45"/>
+  <line x1="36" y1="36" x2="31.5" y2="31.5" stroke="url(#wGrad)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Wordmark: "Quion" in white -->
+  <text x="50" y="29" font-family="'Space Grotesk', sans-serif" font-size="20" font-weight="700" letter-spacing="-0.5" fill="white">Quion</text>
+  <!-- "Ai" in brand blue -->
+  <text x="116" y="29" font-family="'Space Grotesk', sans-serif" font-size="20" font-weight="700" letter-spacing="-0.5" fill="#00D4FF">Ai</text>
+
+  <defs>
+    <linearGradient id="wGrad" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="100%" stop-color="#6D5DFC"/>
+    </linearGradient>
+  </defs>
+</svg>
