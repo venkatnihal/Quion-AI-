@@ -117,24 +117,48 @@ export async function updateBooking(id: string, patch: { status?: string; notes?
   const g = await guard("data.view");
   if (!g.ok) return { ok: false, error: g.error };
 
-  // On approval, best-effort create an Outlook calendar event.
+  // Cancellation / rejection: remove the Outlook event and email the attendee.
+  if (patch.status === "cancelled" || patch.status === "rejected") {
+    const { cancelBooking } = await import("@/lib/booking/service");
+    await cancelBooking(id); // deletes Outlook event + sends cancellation email
+    const res = await updateRow("bookings", id, patch); // preserve the exact status requested
+    if (res.ok) {
+      await logAudit({ userId: g.id, userEmail: g.email, action: "booking.update", entity: `bookings#${id}`, meta: patch });
+      revalidatePath("/admin/bookings");
+    }
+    return res;
+  }
+
+  // Approval: ensure an Outlook event exists + send a confirmation email.
   if (patch.status === "approved") {
     const booking = await getRow<{
       starts_at?: string; ends_at?: string; name?: string; email?: string; topic?: string; outlook_event_id?: string;
     }>("bookings", id);
     if (booking?.starts_at && !booking.outlook_event_id) {
-      const { createCalendarEvent } = await import("@/lib/outlook");
+      const { createCalendarEvent, isOutlookReady } = await import("@/lib/outlook");
       const end = booking.ends_at ?? new Date(new Date(booking.starts_at).getTime() + 30 * 60000).toISOString();
-      const evt = await createCalendarEvent({
-        subject: `QuionAi call — ${booking.name ?? booking.email ?? "Guest"}`,
-        body: booking.topic ?? "Strategy call booked via QuionAi website.",
-        start: booking.starts_at,
-        end,
-        attendeeEmail: booking.email,
-        attendeeName: booking.name,
-      });
-      if (evt.ok && evt.id) {
-        await updateRow("bookings", id, { outlook_event_id: evt.id });
+      if (isOutlookReady) {
+        const evt = await createCalendarEvent({
+          subject: `QuionAi call — ${booking.name ?? booking.email ?? "Guest"}`,
+          body: booking.topic ?? "Strategy call booked via QuionAi website.",
+          start: booking.starts_at,
+          end,
+          attendeeEmail: booking.email,
+          attendeeName: booking.name,
+        });
+        if (evt.ok && evt.id) await updateRow("bookings", id, { outlook_event_id: evt.id });
+      }
+      if (booking.email) {
+        const [{ sendEmail, bookingConfirmationHtml }, { getBookingConfig }] = await Promise.all([
+          import("@/lib/email"),
+          import("@/lib/booking/config"),
+        ]);
+        const cfg = await getBookingConfig();
+        void sendEmail({
+          to: booking.email,
+          subject: `Confirmed: ${cfg.meetingName}`,
+          html: bookingConfirmationHtml({ name: booking.name, startsAt: booking.starts_at, meetingName: cfg.meetingName, timezone: cfg.timezone }),
+        });
       }
     }
   }

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { CalendarDays, X, ExternalLink, ArrowUpRight, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -68,15 +69,13 @@ export function BookingButton({
   fullWidth,
 }: BookingButtonProps) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
+  // All booking CTAs now route to the native /book scheduler (Supabase-backed,
+  // Outlook-synced). The external-embed modal path is kept for backward compat
+  // but is no longer the default.
   const handleClick = () => {
-    if (!isConfigured) {
-      window.open(WHATSAPP_LINK_PREFILLED, "_blank", "noopener,noreferrer");
-    } else if (BOOKING_EMBEDDABLE) {
-      setOpen(true);
-    } else {
-      openBookingTab();
-    }
+    router.push("/book");
   };
 
   return (

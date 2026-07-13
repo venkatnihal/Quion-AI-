@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { GradientText } from "@/components/shared/GradientText";
-import { BookingEmbed } from "@/components/shared/Booking";
+import { BookingScheduler } from "@/components/shared/BookingScheduler";
 import { buildMetadata } from "@/lib/metadata";
 import { WHATSAPP_LINK_PREFILLED, WHATSAPP_DISPLAY, CONTACT_EMAIL } from "@/lib/constants";
 
@@ -46,9 +46,9 @@ export default function BookPage() {
           </div>
         </div>
 
-        {/* Embedded Microsoft Bookings scheduler (booking link configured in src/lib/constants.ts) */}
+        {/* Native scheduler — availability + booking stored in Supabase, synced to Outlook when configured */}
         <div className="container max-w-3xl">
-          <BookingEmbed minHeight={700} />
+          <BookingScheduler />
 
           {/* Fallback contact options */}
           <p className="text-center text-sm text-[#64748B] mt-6">
