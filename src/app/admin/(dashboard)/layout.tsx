@@ -3,7 +3,7 @@ import { getProfile } from "@/lib/auth";
 import { ROLE_LABELS } from "@/lib/rbac";
 import { Sidebar } from "@/components/admin/Sidebar";
 import { Icon } from "@/components/admin/Icon";
-import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { isSupabaseConfigured, isAdminEmail } from "@/lib/supabase/config";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +21,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   const profile = await getProfile();
   if (!profile) redirect("/admin/login");
+  // Hard allowlist: only permitted admin emails ever reach the dashboard.
+  if (!isAdminEmail(profile.email)) redirect("/");
 
   return (
     <div className="min-h-screen bg-[#050816] text-white">

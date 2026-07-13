@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { isAdminEmail } from "@/lib/supabase/config";
 
 const SUPABASE_URL = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? "").replace(/\/$/, "");
 const SUPABASE_ANON_KEY =
@@ -41,6 +42,7 @@ export async function middleware(request: NextRequest) {
   const isAdminArea = pathname.startsWith("/admin");
   const isLogin = pathname === "/admin/login";
 
+  // Not signed in → send to the admin login (preserving intended destination).
   if (isAdminArea && !isLogin && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin/login";
@@ -48,9 +50,20 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // Signed in but NOT an allowlisted admin (e.g. a customer who logged in to
+  // book) → the admin portal is hidden from them; bounce to the public site.
+  if (isAdminArea && !isLogin && user && !isAdminEmail(user.email)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
+
+  // Already signed in and visiting the login page → skip it (admins to the
+  // dashboard, everyone else back to the site).
   if (isLogin && user) {
     const url = request.nextUrl.clone();
-    url.pathname = "/admin";
+    url.pathname = isAdminEmail(user.email) ? "/admin" : "/";
     url.search = "";
     return NextResponse.redirect(url);
   }
